@@ -1,0 +1,30 @@
+{% if data.pages > 1 %}
+<nav aria-label="Navegação de páginas">
+  <ul class="pagination justify-content-center">
+
+    {# --- BOTÃO ANTERIOR --- #}
+    <li class="page-item {% if not data.has_prev %}disabled{% endif %}">
+      <a class="page-link"
+         href="?page={{ data.prev_num }}{% for k, v in request.args.items() if k != 'page' %}&{{ k }}={{ v }}{% endfor %}">
+        Anterior
+      </a>
+    </li>
+
+    {# --- INDICADOR --- #}
+    <li class="page-item disabled">
+      <span class="page-link">
+        Página {{ data.page }} de {{ data.pages }}
+      </span>
+    </li>
+
+    {# --- BOTÃO PRÓXIMA --- #}
+    <li class="page-item {% if not data.has_next %}disabled{% endif %}">
+      <a class="page-link"
+         href="?page={{ data.next_num }}{% for k, v in request.args.items() if k != 'page' %}&{{ k }}={{ v }}{% endfor %}">
+        Próxima
+      </a>
+    </li>
+
+  </ul>
+</nav>
+{% endif %}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Título exibido na aba do navegador ao visualizar o PDF -->
+    <title>InOutControl — Etiqueta Completa</title>
+</head>
+
+<body class="etq-grid">
+
+{% for e in etiquetas %}
+<div class="etq-full">
+    <img src="data:image/png;base64,{{ e.qr }}" class="qr">
+    <img src="data:image/png;base64,{{ e.barcode }}" class="barcode">
+    <strong>{{ e.codigo }}</strong><br>
+    {{ e.nome }}
+</div>
+{% endfor %}
+
+</body>
+</html>

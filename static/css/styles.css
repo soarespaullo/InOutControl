@@ -1,0 +1,743 @@
+/* ============================================================
+   LAYOUT GERAL
+   ============================================================ */
+
+/* Cor de fundo padrão e transições suaves */
+body {
+    background-color: #f5f6fa;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* Marca do navbar */
+.navbar-brand {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Arredondamento padrão dos cards */
+.card {
+    border-radius: 12px;
+}
+
+/* Rodapé claro */
+footer {
+    background: #fff;
+    border-top: 1px solid #ddd;
+}
+
+
+
+/* ============================================================
+   DARK MODE (tema escuro)
+   ============================================================ */
+
+/* Cor geral do fundo e texto */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Cards, tabelas, alertas e footer escuros */
+body.dark-mode .card,
+body.dark-mode .table,
+body.dark-mode footer,
+body.dark-mode .alert {
+    background-color: #1f1f1f !important;
+    color: #e0e0e0 !important;
+}
+
+/* Navbar escura */
+body.dark-mode .navbar {
+    background-color: #000 !important;
+}
+
+/* Links azulados no dark mode */
+body.dark-mode a {
+    color: #9fd3ff;
+}
+
+
+
+/* ============================================================
+   TABELAS NO DARK MODE
+   (Usuários, Peças, Relatórios, etc.)
+   ============================================================ */
+
+/* Cabeçalho da tabela escuro */
+body.dark-mode table.table thead tr {
+    background-color: #000 !important;
+    color: #e0e0e0 !important;
+}
+
+/* Linhas da tabela (inclui striped e hover) */
+body.dark-mode table.table tbody tr {
+    background-color: #1f1f1f !important;
+    color: #e0e0e0 !important;
+}
+
+/* Linhas em tabelas listradas (striped) */
+body.dark-mode table.table.table-striped tbody tr:nth-of-type(odd),
+body.dark-mode table.table.table-striped tbody tr:nth-of-type(even) {
+    background-color: #202020 !important;
+}
+
+/* Hover nas linhas */
+body.dark-mode table.table.table-hover tbody tr:hover {
+    background-color: #2a2a2a !important;
+}
+
+/* Bordas da tabela */
+body.dark-mode table.table td,
+body.dark-mode table.table th {
+    border-color: #333 !important;
+}
+
+
+
+/* ============================================================
+   FORMULÁRIOS NO DARK MODE
+   (inputs, selects, textareas, filtros, modal)
+   ============================================================ */
+
+/* Inputs, selects e textareas escuros */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: #2a2a2a !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #444 !important;
+}
+
+/* Placeholder mais claro */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #b5b5b5 !important;
+}
+
+/* Select com seta visível */
+body.dark-mode select {
+    background-image: none !important;
+}
+
+/* Labels continuam claras */
+body.dark-mode label {
+    color: #e0e0e0 !important;
+}
+
+/* Modal escuro */
+body.dark-mode .modal-content {
+    background-color: #1f1f1f !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #333 !important;
+}
+
+/* Header e footer do modal */
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+    border-color: #333 !important;
+}
+
+/* ============================================================
+   PAGINAÇÃO — MODO DARK
+   Ajusta cores da paginação quando o sistema está em dark mode
+   ============================================================ */
+
+body.dark-mode .pagination .page-link {
+    background-color: #1f1f1f !important;
+    border-color: #444 !important;
+    color: #ddd !important;
+}
+
+body.dark-mode .pagination .page-link:hover {
+    background-color: #333 !important;
+    border-color: #666 !important;
+    color: #fff !important;
+}
+
+body.dark-mode .pagination .active .page-link {
+    background-color: #dc3545 !important; /* vermelho elegante */
+    border-color: #dc3545 !important;
+    color: #fff !important;
+}
+
+body.dark-mode .pagination .disabled .page-link {
+    background-color: #2a2a2a !important;
+    border-color: #444 !important;
+    color: #666 !important;
+}
+
+/* ============================================================
+   TIMELINE — ANIMAÇÃO DE ENTRADA
+   ============================================================ */
+
+/* Animação suave ao carregar itens */
+.timeline li {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.4s forwards;
+}
+
+/* Pequeno atraso alternado para efeito cascata */
+.timeline li:nth-child(odd) {
+    animation-delay: 0.1s;
+}
+
+.timeline li:nth-child(even) {
+    animation-delay: 0.2s;
+}
+
+/* Keyframe da animação */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* ============================================================
+   MENSAGEM "Nenhuma movimentação neste dia"
+   ============================================================ */
+
+/* Modo claro */
+.timeline-empty {
+    color: #555;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Modo escuro — BRANCO E VISÍVEL */
+body.dark-mode .timeline-empty {
+    color: #ffffff !important;
+}
+
+
+
+/* ============================================================
+   DESTAQUE DE MOVIMENTAÇÕES RECENTES (modo claro)
+   ============================================================ */
+
+/* Destaque forte — últimos 5 minutos */
+.recent-strong {
+    animation: pulseStrong 1.5s infinite;
+    border-left: 5px solid #28a745 !important;
+}
+
+/* Destaque leve — últimos 30 minutos */
+.recent-light {
+    animation: pulseLight 2.5s infinite;
+    border-left: 5px solid #17a2b8 !important;
+}
+
+/* Animação do destaque forte */
+@keyframes pulseStrong {
+    0% { background-color: #eaffea; }
+    50% { background-color: #ffffff; }
+    100% { background-color: #eaffea; }
+}
+
+/* Animação do destaque leve */
+@keyframes pulseLight {
+    0% { background-color: #eefaff; }
+    50% { background-color: #ffffff; }
+    100% { background-color: #eefaff; }
+}
+
+
+
+/* ============================================================
+   DARK MODE — AJUSTES ESPECÍFICOS DA TIMELINE
+   ============================================================ */
+
+/* Cards da timeline realmente escuros */
+body.dark-mode .card {
+    background-color: #1e1e1e !important;
+    color: #e0e0e0 !important;
+    border-color: #333 !important;
+}
+
+/* Texto "muted" mais visível */
+body.dark-mode .card .text-muted {
+    color: #b5b5b5 !important;
+}
+
+/* Badges ajustadas para contraste */
+body.dark-mode .badge.bg-warning {
+    background-color: #d4a72c !important;
+    color: #000 !important;
+}
+
+body.dark-mode .badge.bg-success {
+    background-color: #2e7d32 !important;
+}
+
+/* Bordas de status mais visíveis */
+body.dark-mode .border-danger {
+    border-left: 5px solid #ff6b6b !important;
+}
+
+body.dark-mode .border-success {
+    border-left: 5px solid #4caf50 !important;
+}
+
+/* Destaque forte no dark mode */
+body.dark-mode .recent-strong {
+    animation: pulseStrongDark 1.5s infinite;
+    border-left: 5px solid #4caf50 !important;
+}
+
+/* Destaque leve no dark mode */
+body.dark-mode .recent-light {
+    animation: pulseLightDark 2.5s infinite;
+    border-left: 5px solid #64b5f6 !important;
+}
+
+/* Animação forte no dark mode */
+@keyframes pulseStrongDark {
+    0% { background-color: #1f2a1f; }
+    50% { background-color: #1e1e1e; }
+    100% { background-color: #1f2a1f; }
+}
+
+/* Animação leve no dark mode */
+@keyframes pulseLightDark {
+    0% { background-color: #1f242f; }
+    50% { background-color: #1e1e1e; }
+    100% { background-color: #1f242f; }
+}
+
+/* ============================================================
+   FOOTER — ESTILOS DO LINK DO DESENVOLVEDOR
+   ============================================================ */
+
+/* Remove o sublinhado do link no rodapé para um visual mais limpo */
+.app-footer a {
+    text-decoration: none !important;
+}
+
+/* ============================================================
+   DASHBOARD — BAIXO ESTOQUE (DARK MODE FIX)
+   ============================================================ */
+
+/* Modo claro: mantém o padrão */
+.list-group-item {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Modo escuro: ajusta fundo e texto */
+body.dark-mode .list-group-item {
+    background-color: #1f1f1f !important;
+    color: #fff !important;
+    border-color: #333 !important;
+}
+
+/* Badge no dark mode */
+body.dark-mode .list-group-item .badge {
+    color: #fff !important;
+}
+
+
+/* ============================================================
+   ESTILOS EXCLUSIVOS DO PDF
+   Tudo aqui só afeta elementos dentro de <body class="pdf">
+   ============================================================ */
+
+/* ----- Estrutura geral ----- */
+.pdf {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+    color: #222;
+}
+
+/* ----- Cabeçalho ----- */
+.pdf .header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.pdf .header h1 {
+    margin: 0;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+.pdf .header h2 {
+    margin: 5px 0 0 0;
+    font-size: 18px;
+    font-weight: normal;
+    color: #555;
+}
+
+/* ----- Tabela principal ----- */
+.pdf table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    font-size: 13px;
+}
+
+/* Células e bordas */
+.pdf th,
+.pdf td {
+    border: 1px solid #444;
+    padding: 8px;
+}
+
+/* Cabeçalho da tabela */
+.pdf th {
+    background: #f0f0f0;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Linhas alternadas */
+.pdf tr:nth-child(even) {
+    background: #fafafa;
+}
+
+/* ----- Rodapé ----- */
+.pdf .footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 12px;
+    color: #777;
+}
+
+/* ============================================================
+   ESTILOS EXCLUSIVOS DO PDF
+   Tudo aqui só afeta elementos dentro de <body class="pdf">
+   ============================================================ */
+
+/* ----- Estrutura geral ----- */
+.pdf {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+    color: #222;
+}
+
+/* ----- Cabeçalho ----- */
+.pdf .header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.pdf .header h1 {
+    margin: 0;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+.pdf .header h2 {
+    margin: 5px 0 0 0;
+    font-size: 18px;
+    font-weight: normal;
+    color: #555;
+}
+
+/* ----- Tabela principal ----- */
+.pdf table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    font-size: 13px;
+}
+
+/* Células e bordas */
+.pdf th,
+.pdf td {
+    border: 1px solid #444;
+    padding: 8px;
+}
+
+/* Cabeçalho da tabela */
+.pdf th {
+    background: #f0f0f0;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Linhas alternadas */
+.pdf tr:nth-child(even) {
+    background: #fafafa;
+}
+
+/* ----- Rodapé ----- */
+.pdf .footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 12px;
+    color: #777;
+}
+
+/* ============================================
+   PDF — Forçar fundo branco no documento
+   ============================================ */
+.pdf {
+    background: #ffffff !important;   /* Fundo branco */
+    color: #000000 !important;        /* Texto preto */
+}
+
+/* Remove qualquer fundo herdado de Bootstrap */
+.pdf body,
+.pdf html {
+    background: #ffffff !important;
+}
+
+/* Garante que tabelas também fiquem brancas */
+.pdf table {
+    background: #ffffff !important;
+}
+
+
+/* ============================================================
+   DASHBOARD — CARDS CLICÁVEIS
+   Estes estilos deixam os cards do topo clicáveis, com hover suave
+   e cursor de "mãozinha". Não afetam outras partes do sistema.
+   ============================================================ */
+
+.clickable-card {
+    cursor: pointer; /* Mostra que o card é clicável */
+    transition: transform .15s ease, box-shadow .15s ease; /* Animação suave */
+}
+
+.clickable-card:hover {
+    transform: translateY(-3px); /* Levanta o card ao passar o mouse */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15); /* Sombra mais forte no hover */
+}
+
+/* Remove sublinhado dos links que envolvem os cards */
+.card-link {
+    text-decoration: none !important;
+    color: inherit !important; /* Mantém a cor original do texto */
+}
+
+
+/* ============================================================
+   ETIQUETAS — CSS COMPLETO E COMENTADO
+   Este bloco é totalmente isolado e NÃO interfere no tema dark.
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   MODELO A — ETIQUETA TÉRMICA (80mm)
+   - Largura padrão de impressoras térmicas
+   - Fonte monoespaçada para estilo de cupom
+   - Linha pontilhada entre etiquetas
+   ------------------------------------------------------------ */
+.etq-termica .etq-box {
+    width: 80mm;                     /* largura real de bobina térmica */
+    padding: 8px;
+    border-bottom: 1px dashed #000;  /* separador entre etiquetas */
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+
+/* ------------------------------------------------------------
+   MODELO B — ETIQUETAS PEQUENAS (50×30mm)
+   - Ideal para impressoras de etiquetas adesivas
+   - Layout em grade
+   ------------------------------------------------------------ */
+.etq-grid {
+    display: flex;
+    flex-wrap: wrap;                 /* permite várias etiquetas por linha */
+    gap: 4px;
+}
+
+.etq-small {
+    width: 50mm;
+    height: 30mm;
+    border: 1px solid #000;
+    padding: 4px;
+    font-size: 12px;
+    overflow: hidden;                /* evita texto estourar */
+}
+
+
+/* ------------------------------------------------------------
+   MODELO C — A4 (3 COLUNAS)
+   - Para impressão em impressoras comuns
+   - 3 etiquetas por linha
+   ------------------------------------------------------------ */
+.etq-a4 {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.etq-a4-item {
+    width: 33%;                      /* 3 colunas */
+    border: 1px solid #000;
+    padding: 8px;
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+
+/* ------------------------------------------------------------
+   QR CODE E CÓDIGO DE BARRAS
+   - Usados nos modelos D, E e F
+   ------------------------------------------------------------ */
+.qr {
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.barcode {
+    width: 120px;
+    height: 40px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+
+/* ------------------------------------------------------------
+   MODELO F — COMPLETO (QR + BARCODE + NOME)
+   - Combinação de tudo
+   ------------------------------------------------------------ */
+.etq-full {
+    width: 60mm;
+    border: 1px solid #000;
+    padding: 6px;
+    margin: 4px;
+    font-size: 12px;
+    text-align: center;
+}
+
+
+/* ------------------------------------------------------------
+   AJUSTES PARA IMPRESSÃO
+   - Remove margens automáticas do navegador
+   - Garante que as etiquetas fiquem alinhadas
+   ------------------------------------------------------------ */
+@media print {
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: white !important;
+    }
+
+    .etq-termica .etq-box {
+        border-bottom: 1px dashed #000;
+    }
+
+    .etq-grid,
+    .etq-a4 {
+        gap: 0;
+    }
+}
+
+/* ============================================================
+   ESTILO DO MENU DE ETIQUETAS
+   Cards menores, animados e compatíveis com tema dark
+   ============================================================ */
+
+/* Card base */
+.etq-card {
+    transition: transform .15s ease, box-shadow .15s ease;
+    border-radius: 10px;
+    padding: 6px;
+}
+
+/* Animação ao passar o mouse */
+.etq-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+/* Ícones maiores e suaves */
+.etq-icon {
+    font-size: 1.8rem;
+    opacity: 0.85;
+}
+
+/* Ajuste para tema dark */
+body.dark-mode .etq-card {
+    background-color: #2b2b2b !important;
+    border: 1px solid #444;
+}
+
+body.dark-mode .etq-card:hover {
+    box-shadow: 0 6px 16px rgba(255,255,255,0.15);
+}
+
+body.dark-mode .etq-icon {
+    opacity: 0.95;
+}
+
+
+/* ============================================================
+   FORMULÁRIOS NO DARK MODE
+   (inputs, selects, textareas, filtros, modal)
+   ============================================================ */
+
+/* Inputs, selects e textareas escuros */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: #2a2a2a !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #444 !important;
+}
+
+/* Placeholder mais claro */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #b5b5b5 !important;
+}
+
+/* Select com seta visível */
+body.dark-mode select {
+    background-image: none !important;
+}
+
+/* Labels continuam claras */
+body.dark-mode label {
+    color: #e0e0e0 !important;
+}
+
+/* Modal escuro */
+body.dark-mode .modal-content {
+    background-color: #1f1f1f !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #333 !important;
+}
+
+/* Header e footer do modal */
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+    border-color: #333 !important;
+}
+
+
+/* ============================================================
+   INPUT FILE — AJUSTE PARA TEMA DARK
+   ============================================================ */
+
+/* Campo de upload escuro */
+body.dark-mode input[type="file"].form-control {
+    background-color: #000 !important;   /* fundo preto */
+    color: #fff !important;              /* texto branco */
+    border: 1px solid #444 !important;
+}
+
+/* Botão interno do input file (webkit browsers) */
+body.dark-mode input[type="file"]::file-selector-button {
+    background-color: #222 !important;   /* botão escuro */
+    color: #fff !important;              /* texto branco */
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Hover do botão */
+body.dark-mode input[type="file"]::file-selector-button:hover {
+    background-color: #444 !important;
+}
+

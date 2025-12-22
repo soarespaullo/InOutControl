@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}InOutControl — Usuários{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm border-0">
+    <div class="card-body p-4">
+
+        <h4 class="fw-bold mb-4">
+            <i class="bi bi-person"></i>
+            {% if user %}Editar Usuário{% else %}Novo Usuário{% endif %}
+        </h4>
+
+        <form method="POST">
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Nome</label>
+                    <input type="text" name="nome" class="form-control form-control-sm"
+                           value="{{ user.nome if user else '' }}" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">E-mail</label>
+                    <input type="email" name="email" class="form-control form-control-sm"
+                           value="{{ user.email if user else '' }}" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Telefone</label>
+                    <input type="text" name="telefone" id="telefone" maxlength="15"
+                           class="form-control form-control-sm"
+                           value="{{ user.telefone if user else '' }}" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Função</label>
+                    <input type="text" name="funcao" class="form-control form-control-sm"
+                           value="{{ user.funcao if user else '' }}" required>
+                </div>
+            </div>
+
+            <!-- Botões com ícones -->
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <a href="{{ url_for('users.list_users') }}" 
+                   class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1">
+                    <i class="bi bi-arrow-left-circle"></i> Voltar
+                </a>
+                <button type="submit" 
+                        class="btn btn-primary btn-sm px-3 d-flex align-items-center gap-1">
+                    <i class="bi bi-check-circle"></i> Salvar
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+{% endblock %}

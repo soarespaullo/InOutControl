@@ -1,0 +1,33 @@
+Flask
+Flask-SQLAlchemy
+Werkzeug
+Jinja2
+
+# PDF
+WeasyPrint
+
+# Dependências do WeasyPrint
+cairocffi
+tinycss2
+cssselect2
+html5lib
+Pyphen
+
+# Banco de dados
+SQLAlchemy
+
+# QR Code
+qrcode[pil]
+
+# Código de barras
+python-barcode
+Pillow
+
+# Paginação
+Flask-Paginate
+
+# Variáveis de ambiente
+python-dotenv
+
+# Compactação
+pyminizip

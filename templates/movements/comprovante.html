@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>InOutControl — Comprovante de Movimentação</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 40px; }
+  h2 { text-align: center; margin-bottom: 20px; }
+  .box { 
+    border: 1px solid #333; 
+    padding: 20px; 
+    border-radius: 8px; /* bordas arredondadas */
+  }
+  p { margin: 6px 0; }
+  strong { color: #222; }
+</style>
+</head>
+<body>
+
+<h2>InOutControl — Comprovante de Movimentação</h2>
+
+<div class="box">
+  <p><strong>ID:</strong> {{ mov.id }}</p>
+  <p><strong>Usuário:</strong> {{ mov.user.nome }}</p>
+  <p><strong>Peça:</strong> {{ mov.part.nome }}</p>
+  <p><strong>Quantidade:</strong> {{ mov.quantidade }}</p>
+  <p><strong>Retirada:</strong> {{ mov.data_hora.strftime('%d/%m/%Y %H:%M') }}</p>
+
+  {% if mov.data_devolucao %}
+    <p><strong>Devolução:</strong> {{ mov.data_devolucao.strftime('%d/%m/%Y %H:%M') }}</p>
+    <p><strong>Devolvido por:</strong> {{ mov.devolvido_por }}</p>
+  {% endif %}
+
+  <p><strong>Observação:</strong> {{ mov.observacao or '-' }}</p>
+</div>
+
+<script>
+  window.print()
+</script>
+
+</body>
+</html>

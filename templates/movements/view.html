@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Movimentação {{ mov.id }} — InOutControl{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm border-0">
+    <div class="card-body p-4">
+
+        <h4 class="fw-bold mb-4">
+            <i class="bi bi-arrow-left-right"></i>
+            Movimentação #{{ mov.id }}
+        </h4>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <p class="mb-1"><strong>Data:</strong></p>
+                <p>{{ mov.data_hora.strftime('%d/%m/%Y %H:%M') }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <p class="mb-1"><strong>Usuário:</strong></p>
+                <p>{{ mov.user.nome }}</p>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <p class="mb-1"><strong>Peça:</strong></p>
+                <p>{{ mov.part.nome }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <p class="mb-1"><strong>Tipo:</strong></p>
+                <p>
+                    {% if mov.tipo == 'saida' %}
+                        <span class="badge bg-warning text-dark">Retirada</span>
+                    {% else %}
+                        <span class="badge bg-success">Entrada</span>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <p class="mb-1"><strong>Quantidade:</strong></p>
+                <p>{{ mov.quantidade }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <p class="mb-1"><strong>Status:</strong></p>
+                <p>
+                    {% if mov.emprestimo_aberto %}
+                        <span class="badge bg-danger">Em aberto</span>
+                    {% else %}
+                        <span class="badge bg-primary">Finalizado</span>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+
+        {% if mov.observacao %}
+        <div class="mb-3">
+            <p class="mb-1"><strong>Observações:</strong></p>
+            <div class="p-2 border rounded" style="white-space: pre-wrap;">
+                {{ mov.observacao }}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if mov.data_devolucao %}
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <p class="mb-1"><strong>Data de Devolução:</strong></p>
+                <p>{{ mov.data_devolucao.strftime('%d/%m/%Y %H:%M') }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <p class="mb-1"><strong>Devolvido por:</strong></p>
+                <p>{{ mov.devolvido_por }}</p>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="d-flex justify-content-end mt-4">
+            <a href="{{ url_for('dashboard.index') }}" class="btn btn-outline-secondary btn-sm">
+                Voltar
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

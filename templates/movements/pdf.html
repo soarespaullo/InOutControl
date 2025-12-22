@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<!-- Título exibido na aba do navegador ao visualizar o PDF -->
+<title>InOutControl — Relatório de Movimentações</title>
+
+<!-- Importa o CSS externo -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+</head>
+<body class="pdf">
+
+<div class="header">
+    <h1>InOutControl</h1>
+    <h2>Relatório de Movimentações — Dia {{ dia }}</h2>
+</div>
+
+<table>
+<thead>
+<tr>
+    <th>Hora</th>
+    <th>Usuário</th>
+    <th>Peça</th>
+    <th>Qtd</th>
+    <th>Tipo</th>
+    <th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+{% for mov in movimentos %}
+<tr>
+    <td>{{ mov.data_hora.strftime('%H:%M') }}</td>
+    <td>{{ mov.user.nome }}</td>
+    <td>{{ mov.part.nome }}</td>
+    <td>{{ mov.quantidade }}</td>
+    <td>
+        {% if mov.tipo == 'saida' %}
+            Retirada
+        {% else %}
+            Entrada
+        {% endif %}
+    </td>
+    <td>
+        {% if mov.emprestimo_aberto %}
+            Aberto
+        {% else %}
+            Devolvido
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+<div class="footer">
+    Relatório gerado automaticamente pelo sistema InOutControl.
+</div>
+
+</body>
+</html>
