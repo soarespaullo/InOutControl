@@ -105,7 +105,7 @@ O SQLAlchemy criará as tabelas.
 No terminal, com o ambiente virtual ativo:
 
 ```
-py run.py
+python app.py
 ```
 
 ## 7. Extras (Windows)
