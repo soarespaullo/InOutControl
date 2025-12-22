@@ -54,9 +54,9 @@ py --version
 ```
 
 - [ ] Instalar Git (opcional, para clonar repositório)
-- [ ] Instalar *Microsoft Visual C++ Build Tools* (necessário para compilar pacotes como `pyminizip`):
+- [ ] Instalar **Microsoft Visual C++ Build Tools** (necessário para compilar pacotes como `pyminizip`):
 👉 [Download oficial](https://visualstudio.microsoft.com/pt-br/visual-cpp-build-tools/?utm_source=copilot.com)  
-Durante a instalação, selecione *Desktop development with C++*.
+Durante a instalação, selecione **Desktop development with C++**.
 
 ## 2. Criar ambiente virtual
 
@@ -88,12 +88,12 @@ Com o ambiente virtual ativo:
 pip install -r requirements.txt
 ```
 
-> ⚠️ O pacote `pyminizip` exige os *Build Tools* instalados para compilar corretamente.
+> ⚠️ O pacote `pyminizip` exige os **Build Tools** instalados para compilar corretamente.
 Se a instalação falhar, verifique se o compilador MSVC foi instalado e se o ambiente está configurado.
 
 ## 5. Banco de Dados
 
-O banco SQLite será criado automaticamente como inoutcontrol.db na raiz do projeto:
+O banco SQLite será criado automaticamente como `inoutcontrol.db` na raiz do projeto:
 
 ```
 py run.py
@@ -115,12 +115,12 @@ python app.py
 O WeasyPrint depende de bibliotecas gráficas externas (GTK, Cairo, Pango, GObject).
 No Windows, siga estes passos:
 
-1. Baixe e instale o *GTK3 Runtime*:
+1. Baixe e instale o **GTK3 Runtime**:
   👉 [Download GTK 3 Runtime](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases?utm_source=copilot.com)
 
-2. Durante a instalação, escolha a versão *Win64*.
+2. Durante a instalação, escolha a versão **Win64**.
 
-3. Adicione a pasta `bin` ao *PATH* do Windows:
+3. Adicione a pasta `bin` ao **PATH** do Windows:
 
 - Pressione Win + R, digite:
 
@@ -132,11 +132,11 @@ sysdm.cpl
 
 - Clique em Variáveis de Ambiente.
 
-4. Editar a variável *Path*
+4. Editar a variável **Path**
 
-- Na seção *Variáveis do Sistema*, encontre a variável chamada Path.
+- Na seção **Variáveis do Sistema**, encontre a variável chamada Path.
 
-- Selecione e clique em *Editar*.
+- Selecione e clique em **Editar**.
 
 5. Adicionar o caminho do GTK
 
@@ -147,13 +147,13 @@ sysdm.cpl
 ```
 C:\Program Files\GTK3-Runtime Win64\bin
 ```
-- Clique em *OK* para salvar.
+- Clique em **OK** para salvar.
 
 6. Aplicar e reiniciar
 
-- Feche todas as janelas com *OK*.
+- Feche todas as janelas com **OK**.
 
-- Reinicie o *terminal (PowerShell ou CMD)* para que a alteração seja reconhecida.
+- Reinicie o **terminal (PowerShell ou CMD)** para que a alteração seja reconhecida.
 
 ## 7.2 Desenvolvimento
 
