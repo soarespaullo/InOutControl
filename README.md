@@ -79,6 +79,7 @@ pip install -r requirements.txt
 
 ```
 py run.py
+```
 
 O SQLAlchemy criará as tabelas.
 
@@ -92,11 +93,11 @@ py run.py
 
 ### 6. Extras (Windows)
 
-Para geração de PDF com WeasyPrint, instale dependências gráficas:
+- Para geração de PDF com WeasyPrint, instale dependências gráficas:
 
-GTK, Cairo e Pango (via instalador do Windows).
+- GTK, Cairo e Pango (via instalador do Windows).
 
-Para desenvolvimento:
+- Para desenvolvimento:
 
 ```
 set FLASK_ENV=development
@@ -108,6 +109,7 @@ flask run
 ```
 http://127.0.0.1:5000
 ```
+
 
 ---
 
