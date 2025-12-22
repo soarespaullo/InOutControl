@@ -42,19 +42,28 @@ Ele oferece recursos de cadastro de peças e usuários, controle de movimentaç�
 
 ---
 
-## 🚀 Instalação (Windows)
+# 🚀 Guia de Instalação — InOutControl (Windows)
 
-### 1. Clonar repositório
+## 1. Pré-requisitos
+
+- [ ] Instalar **Python 3.10+** (https://www.python.org/downloads/)
+- [ ] Verificar instalação:
+- [ ] Instalar Git (opcional, para clonar repositório)
 
 ```
-git clone https://github.com/soarespaullo/InOutControl.git
-cd InOutControl
+py --version
 ```
 
 ### 2. Criar ambiente virtual
 
+No terminal (PowerShell ou CMD), dentro da pasta do projeto:
+
 ```
 py -m venv venv
+Ativar o ambiente:
+```
+
+```
 venv\Scripts\activate
 ```
 
@@ -64,11 +73,36 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 4. Executar aplicação
+### 4. Banco de Dados
+
+> O banco SQLite será criado automaticamente como inoutcontrol.db na raiz do projeto.
 
 ```
-py app.py
+py run.py
+
+O SQLAlchemy criará as tabelas.
+
+### 5. Executar o servidor
+
+> No terminal, com o ambiente virtual ativo:
+
 ```
+py run.py
+```
+
+### 6. Extras (Windows)
+
+Para geração de PDF com WeasyPrint, instale dependências gráficas:
+
+GTK, Cairo e Pango (via instalador do Windows).
+
+Para desenvolvimento:
+
+```
+set FLASK_ENV=development
+flask run
+```
+
 ### Acesse no navegador:
 
 ```
