@@ -48,11 +48,13 @@ Ele oferece recursos de cadastro de peças e usuários, controle de movimentaç�
 
 - [ ] Instalar **Python 3.10+** ([Download](https://www.python.org/downloads/))
 - [ ] Verificar instalação:
-- [ ] Instalar Git (opcional, para clonar repositório)
 
 ```
 py --version
 ```
+
+- [ ] Instalar Git (opcional, para clonar repositório)
+
 
 ### 2. Criar ambiente virtual
 
