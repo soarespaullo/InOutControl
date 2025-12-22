@@ -62,8 +62,8 @@ No terminal (PowerShell ou CMD), dentro da pasta do projeto:
 
 ```
 py -m venv venv
-Ativar o ambiente:
 ```
+Ativar o ambiente:
 
 ```
 venv\Scripts\activate
