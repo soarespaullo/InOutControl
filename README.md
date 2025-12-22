@@ -20,13 +20,11 @@ Ele oferece recursos de cadastro de peças e usuários, controle de movimentaç�
 
 ## 🖼️ Screenshots
 
-> Salve suas imagens na pasta `screenshot/` e substitua os nomes abaixo.
-
 ### Dashboard
 ![Dashboard](screenshot/dashboard.png)
 
 ### Cadastro de Peças
-![Cadastro de Peças](screenshot/cadastro_pecas.png)
+![Cadastro de Peças](screenshot/pecas.png)
 
 ### Relatório em PDF
 ![Relatório PDF](screenshot/relatorio_pdf.png)
