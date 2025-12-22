@@ -26,8 +26,8 @@ Ele oferece recursos de cadastro de peças e usuários, controle de movimentaç�
 ### Cadastro de Peças
 ![Cadastro de Peças](screenshot/pecas.png)
 
-### Relatório em PDF
-![Relatório PDF](screenshot/relatorio_pdf.png)
+### Movimentação
+![Movimentação](screenshot/movimentacao.png)
 
 ---
 
@@ -47,14 +47,9 @@ Ele oferece recursos de cadastro de peças e usuários, controle de movimentaç�
 ### 1. Clonar repositório
 
 ```
-git clone git@github.com:seuusuario/InOutControl.gitd InOutControlol
+git clone https://github.com/soarespaullo/InOutControl.git
+cd InOutControl
 ```
 
-
-
-
-
-
-
-
+### 2. Criar ambiente virtual
 
