@@ -46,7 +46,7 @@ Ele oferece recursos de cadastro de peças e usuários, controle de movimentaç�
 
 ## 1. Pré-requisitos
 
-- [ ] Instalar **Python 3.10+** (https://www.python.org/downloads/)
+- [ ] Instalar **Python 3.10+** ([Download](https://www.python.org/downloads/))
 - [ ] Verificar instalação:
 - [ ] Instalar Git (opcional, para clonar repositório)
 
