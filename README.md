@@ -53,3 +53,24 @@ cd InOutControl
 
 ### 2. Criar ambiente virtual
 
+```
+py -m venv venv
+venv\Scripts\activate
+```
+
+### 3. Instalar dependências
+
+```
+pip install -r requirements.txt
+```
+
+### 4. Executar aplicação
+
+```
+py app.py
+```
+### Acesse no navegador:
+
+```
+http://127.0.0.1:5000
+```
