@@ -50,8 +50,9 @@ def create_part():
         codigo = request.form.get("codigo", "").strip()
         descricao = request.form.get("descricao", "").strip()
         quantidade = request.form.get("quantidade", "").strip()
+        valor_custo = request.form.get("valor_custo", "").strip()
 
-        if not nome or not codigo or not quantidade:
+        if not nome or not codigo or not quantidade or not valor_custo:
             flash("Preencha todos os campos obrigatórios.", "danger")
             return render_template("parts/form.html", part=None)
 
@@ -59,6 +60,9 @@ def create_part():
         if existente:
             flash("Já existe uma peça com esse código.", "danger")
             return render_template("parts/form.html", part=None)
+
+        # Normalizar valor_custo (aceitar vírgula ou ponto)
+        valor_custo = valor_custo.replace(",", ".")
 
         # Upload da foto com validação
         foto_file = request.files.get("foto_arquivo")
@@ -73,7 +77,14 @@ def create_part():
                 flash("Formato de arquivo inválido. Envie apenas imagens (png, jpg, jpeg, gif).", "danger")
                 return render_template("parts/form.html", part=None)
 
-        part = Part(nome=nome, codigo=codigo, descricao=descricao, quantidade=quantidade, foto=foto_filename)
+        part = Part(
+            nome=nome,
+            codigo=codigo,
+            descricao=descricao,
+            quantidade=int(quantidade),
+            valor_custo=float(valor_custo),
+            foto=foto_filename
+        )
         db.session.add(part)
         db.session.commit()
         flash("Peça cadastrada com sucesso!", "success")
@@ -92,8 +103,9 @@ def edit_part(id):
         codigo = request.form.get("codigo", "").strip()
         descricao = request.form.get("descricao", "").strip()
         quantidade = request.form.get("quantidade", "").strip()
+        valor_custo = request.form.get("valor_custo", "").strip()
 
-        if not nome or not codigo or not quantidade:
+        if not nome or not codigo or not quantidade or not valor_custo:
             flash("Preencha todos os campos obrigatórios.", "danger")
             return render_template("parts/form.html", part=part)
 
@@ -102,10 +114,14 @@ def edit_part(id):
             flash("Já existe outra peça com esse código.", "danger")
             return render_template("parts/form.html", part=part)
 
+        # Normalizar valor_custo (aceitar vírgula ou ponto)
+        valor_custo = valor_custo.replace(",", ".")
+
         part.nome = nome
         part.codigo = codigo
         part.descricao = descricao
-        part.quantidade = quantidade
+        part.quantidade = int(quantidade)
+        part.valor_custo = float(valor_custo)
 
         # Upload da foto com validação
         foto_file = request.files.get("foto_arquivo")
