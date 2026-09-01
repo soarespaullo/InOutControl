@@ -1,63 +1,87 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
+{% extends "reports/base_report.html" %}
 
-<!-- Título exibido na aba do navegador ao visualizar o PDF -->
-<title>InOutControl — Relatório de Movimentações</title>
+{% block title %}InOutControl — Relatório de Movimentações ({{ dia }}){% endblock %}
 
-<!-- Importa o CSS externo -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% block report_title %}Relatório de Movimentações — Dia {{ dia }}{% endblock %}
 
-</head>
-<body class="pdf">
-
-<div class="header">
-    <h1>InOutControl</h1>
-    <h2>Relatório de Movimentações — Dia {{ dia }}</h2>
+{% block box_header_meta %}
+<div class="box-header-info">
+  <div><strong>Data de Referência:</strong> {{ dia }}</div>
+  <div><strong>Emissão:</strong> {{ data_emissao if data_emissao is defined else dia }} &bull; <strong>Total de Registros:</strong> {{ movimentos|length }}</div>
 </div>
+{% endblock %}
 
-<table>
-<thead>
-<tr>
-    <th>Hora</th>
-    <th>Usuário</th>
-    <th>Peça</th>
-    <th>Qtd</th>
-    <th>Tipo</th>
-    <th>Status</th>
-</tr>
-</thead>
+{% block report_summary %}
+{% set total_qtd = movimentos|sum(attribute='quantidade') if movimentos else 0 %}
+{% set abertos = movimentos|selectattr('emprestimo_aberto', 'equalto', true)|list|length if movimentos else 0 %}
+{% set devolvidos = movimentos|selectattr('emprestimo_aberto', 'equalto', false)|list|length if movimentos else 0 %}
 
-<tbody>
-{% for mov in movimentos %}
-<tr>
-    <td>{{ mov.data_hora.strftime('%H:%M') }}</td>
-    <td>{{ mov.user.nome }}</td>
-    <td>{{ mov.part.nome }}</td>
-    <td>{{ mov.quantidade }}</td>
-    <td>
+<div class="summary-grid">
+  <div class="summary-item">
+    <div class="summary-label">Total de Movimentações</div>
+    <div class="summary-val">{{ movimentos|length }}</div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-label">Volume de Peças</div>
+    <div class="summary-val">{{ total_qtd }} un.</div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-label">Empréstimos em Aberto</div>
+    <div class="summary-val" style="color: #c00;">{{ abertos }}</div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-label">Devoluções / Baixas</div>
+    <div class="summary-val" style="color: #166534;">{{ devolvidos }}</div>
+  </div>
+</div>
+{% endblock %}
+
+{% block report_content %}
+{% if movimentos %}
+<table class="report-table">
+  <thead>
+    <tr>
+      <th style="width: 10%;">Hora</th>
+      <th style="width: 25%;">Usuário</th>
+      <th style="width: 35%;">Peça / Marca</th>
+      <th style="width: 10%; text-align: center;">Qtd</th>
+      <th style="width: 10%;">Tipo</th>
+      <th style="width: 10%; text-align: center;">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for mov in movimentos %}
+    <tr>
+      <td class="font-mono">{{ mov.data_hora.strftime('%H:%M') }}</td>
+      <td><strong>{{ mov.user.nome }}</strong></td>
+      <td>
+        {{ mov.part.nome }}
+        {% if mov.part.brand %}
+          <span style="color: #666; font-size: 11px;">[{{ mov.part.brand.nome }}]</span>
+        {% endif %}
+      </td>
+      <td class="text-center font-bold">{{ mov.quantidade }}</td>
+      <td>
         {% if mov.tipo == 'saida' %}
-            Retirada
+          Retirada
         {% else %}
-            Entrada
+          Entrada
         {% endif %}
-    </td>
-    <td>
+      </td>
+      <td class="text-center">
         {% if mov.emprestimo_aberto %}
-            Aberto
+          <span class="status-open">Aberto</span>
         {% else %}
-            Devolvido
+          <span class="status-closed">Devolvido</span>
         {% endif %}
-    </td>
-</tr>
-{% endfor %}
-</tbody>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
-
-<div class="footer">
-    Relatório gerado automaticamente pelo sistema InOutControl.
+{% else %}
+<div class="empty-state-box">
+  Nenhuma movimentação registrada na data selecionada ({{ dia }}).
 </div>
-
-</body>
-</html>
+{% endif %}
+{% endblock %}

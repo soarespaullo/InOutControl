@@ -4,10 +4,17 @@ from flask import send_from_directory, flash, redirect, request
 # AJUSTE DE CAMINHOS: Agora importamos de dentro do pacote 'app'
 from app import create_app
 from app.extensions import db
-from app.models import User, Part, Movement
+from app.models import User, Part, Movement, Note, Brand
+from app.utils.db_migrations import run_migrations
 
 # ============================ # CRIAÇÃO DO APP # ============================
 app = create_app()
+
+# Executa criação e migrações automáticas de banco de dados
+with app.app_context():
+    db.create_all()
+    db_file = os.path.join(app.config["BASE_DIR"], "inoutcontrol.db")
+    run_migrations(db_file)
 
 # Define limite máximo de upload (exemplo: 5 MB)
 app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024
@@ -17,16 +24,6 @@ app.config["UPLOAD_FOLDER"] = os.path.join(app.root_path, "static", "uploads")
 
 # Garante que a pasta de uploads exista
 os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
-
-
-# ============================ # ROTA PARA SERVIR UPLOADS # ============================
-@app.route("/uploads/<path:filename>")
-def uploaded_file(filename):
-    """
-    Rota para servir arquivos enviados (fotos das peças).
-    Busca o arquivo dentro da pasta configurada em UPLOAD_FOLDER.
-    """
-    return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 
 
 # ============================ # TRATAMENTO DE ERRO 413 # ============================

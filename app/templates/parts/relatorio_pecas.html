@@ -1,63 +1,100 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
+{% extends "reports/base_report.html" %}
 
-<title>InOutControl — Relatório de Peças</title>
+{% block title %}InOutControl — Relatório de Peças do Inventário{% endblock %}
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% block report_title %}Relatório de Peças do Inventário — {{ dia }}{% endblock %}
 
-<style>
-  /* Estilo simples para a tag "Em falta" no PDF */
-  .badge-danger {
-    display: inline-block;
-    padding: 2px 6px;
-    font-size: 0.8em;
-    color: #fff;
-    background-color: #dc3545;
-    border-radius: 4px;
-    margin-left: 6px;
-  }
-</style>
-
-</head>
-<body class="pdf">
-
-<div class="header">
-    <h1>InOutControl</h1>
-    <h2>Relatório de Peças — Dia {{ dia }}</h2>
+{% block box_header_meta %}
+<div class="box-header-info">
+  <div>
+    <strong>Filtro:</strong>
+    {% if filtro == 'faltando' %}
+      Apenas Peças em Falta (Estoque = 0)
+    {% elif filtro == 'baixo_estoque' %}
+      Peças com Baixo Estoque (&le; 2 un.)
+    {% else %}
+      Todas as Peças Cadastradas
+    {% endif %}
+  </div>
+  <div><strong>Emissão:</strong> {{ data_emissao if data_emissao is defined else dia }} &bull; <strong>Total Listado:</strong> {{ pecas|length }} itens</div>
 </div>
+{% endblock %}
 
-<table>
-<thead>
-    <tr>
-        <th>Código</th>
-        <th>Nome</th>
-        <th>Descrição</th>
-        <th>Quantidade</th>
-    </tr>
-</thead>
+{% block report_summary %}
+{% set total_itens = pecas|length if pecas else 0 %}
+{% set total_estoque = pecas|sum(attribute='quantidade') if pecas else 0 %}
+{% set em_falta = pecas|selectattr('quantidade', 'equalto', 0)|list|length if pecas else 0 %}
+{% set baixo_estoque = pecas|selectattr('quantidade', 'le', 2)|selectattr('quantidade', 'gt', 0)|list|length if pecas else 0 %}
 
-<tbody>
-{% for p in pecas %}
+<div class="summary-grid">
+  <div class="summary-item">
+    <div class="summary-label">Itens Catalogados</div>
+    <div class="summary-val">{{ total_itens }}</div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-label">Saldo Físico Total</div>
+    <div class="summary-val">{{ total_estoque }} un.</div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-label">Itens em Falta (0 un.)</div>
+    <div class="summary-val" style="color: #c00;">{{ em_falta }}</div>
+  </div>
+  <div class="summary-item">
+    <div class="summary-label">Baixo Estoque (1-2 un.)</div>
+    <div class="summary-val" style="color: #b45309;">{{ baixo_estoque }}</div>
+  </div>
+</div>
+{% endblock %}
+
+{% block report_content %}
+{% if pecas %}
+<table class="report-table">
+  <thead>
     <tr>
-        <td>{{ p.codigo }}</td>
-        <td>
-          {{ p.nome }}
-          {% if p.quantidade == 0 %}
-            <span class="badge-danger">Em falta</span>
-          {% endif %}
-        </td>
-        <td>{{ p.descricao if p.descricao else '-' }}</td>
-        <td>{{ p.quantidade }}</td>
+      <th style="width: 15%;">Código</th>
+      <th style="width: 38%;">Nome da Peça</th>
+      <th style="width: 32%;">Marca / Descrição</th>
+      <th style="width: 15%; text-align: center;">Quantidade</th>
     </tr>
-{% endfor %}
-</tbody>
+  </thead>
+  <tbody>
+    {% for p in pecas %}
+    <tr>
+      <td class="font-mono font-bold">{{ p.codigo }}</td>
+      <td>
+        <strong>{{ p.nome }}</strong>
+        {% if p.quantidade == 0 %}
+          <span class="status-alert" style="font-size: 11px; margin-left: 4px;">[Em Falta]</span>
+        {% elif p.quantidade <= 2 %}
+          <span style="color: #b45309; font-weight: bold; font-size: 11px; margin-left: 4px;">[Baixo Estoque]</span>
+        {% endif %}
+      </td>
+      <td>
+        {% if p.brand %}
+          <strong>[{{ p.brand.nome }}]</strong>
+        {% endif %}
+        {% if p.descricao %}
+          <span style="color: #555;">{{ p.descricao }}</span>
+        {% elif not p.brand %}
+          <span style="color: #888;">-</span>
+        {% endif %}
+      </td>
+      <td class="text-center font-bold" style="font-size: 13px;">
+        {% if p.quantidade == 0 %}
+          <span style="color: #c00;">0</span>
+        {% elif p.quantidade <= 2 %}
+          <span style="color: #b45309;">{{ p.quantidade }}</span>
+        {% else %}
+          <span style="color: #166534;">{{ p.quantidade }}</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
-
-<div class="footer">
-    Relatório gerado automaticamente pelo sistema InOutControl.
+{% else %}
+<div class="empty-state-box">
+  Nenhuma peça localizada para o filtro selecionado.
 </div>
-
-</body>
-</html>
+{% endif %}
+{% endblock %}
